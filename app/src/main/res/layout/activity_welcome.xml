@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/widget34"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#1b80b9"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/btnThree"
+        android:background="#65d1f5"
+        android:layout_width="match_parent"
+        android:textColor="@color/div_white"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_height="match_parent"
+        android:text="确    认"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:transitionName="sharedView"/>
+
+</LinearLayout>
