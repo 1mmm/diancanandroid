@@ -46,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 sy.setVisibility(View.VISIBLE);
                 gl.setVisibility(View.VISIBLE);
         }
+        gld.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
 
     }
