@@ -1,13 +1,14 @@
 package com.example.a111111.diancan;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import com.example.a111111.diancan.gld.manager;
+
 import static com.example.a111111.diancan.login.level;
 public class MainActivity extends AppCompatActivity {
     TextView gkd,hcd,syd,gld,ctd;
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         gld.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, manager.class);
+                startActivity(intent);
             }
         });
 

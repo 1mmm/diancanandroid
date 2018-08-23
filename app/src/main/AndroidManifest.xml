@@ -34,7 +34,8 @@
         </activity>
         <activity android:name=".register" />
         <activity android:name=".welcome" />
-        <activity android:name=".manager"></activity>
+        <activity android:name=".gld.manager" />
+        <activity android:name=".gld.inside.cdmanager"></activity>
     </application>
 
 </manifest>
