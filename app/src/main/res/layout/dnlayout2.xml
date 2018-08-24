@@ -23,6 +23,118 @@
             android:text="title"
             android:background="@mipmap/up_bar"
             android:visibility="visible" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/bg_white"
+                android:orientation="vertical" >
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_marginTop="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:text="菜品名称："
+                    android:layout_weight="2.0"
+                    android:textColor="#666872" />
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:textSize="15dp"
+                    android:gravity="center_vertical|center_vertical"
+                    android:hint="请输入菜名"
+                    android:text="法式鹅肝"
+                    android:layout_weight="1.0"
+                    android:textColor="#666872"/>
+
+
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:gravity="left|center_vertical"
+                    android:layout_weight="2.0"
+
+                    android:text="价格："
+                    android:textColor="#666872" />
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center_vertical"
+                    android:textSize="15sp"
+                    android:inputType="number"
+                    android:text="100"
+                    android:layout_weight="1.0"
+                    android:textColor="#666872"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:layout_weight="2.0"
+                    android:text="描述："
+                    android:textColor="#666872" />
+                <EditText
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center_vertical"
+                    android:text="好吃"
+                    android:textSize="15sp"
+                    android:inputType="textMultiLine"
+                    android:minLines="2"
+                    android:layout_weight="1.0"
+                    android:textColor="#666872"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/first_log_container"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="点击图片以修改"
+                    android:textColor="#37d3da"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"/>
+            </LinearLayout>
         <ImageView
             android:id="@+id/lv"
             style="@style/text_18_ffffff"
@@ -31,6 +143,8 @@
             android:contentDescription="大图"
             android:gravity="center"
             android:visibility="visible" />
+            </LinearLayout>
+        </ScrollView>
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="fill_parent"

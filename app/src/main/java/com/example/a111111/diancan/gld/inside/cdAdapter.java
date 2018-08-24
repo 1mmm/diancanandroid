@@ -9,9 +9,14 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,21 +24,32 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a111111.diancan.R;
+import com.example.a111111.diancan.login;
+import com.example.a111111.diancan.register;
+import com.example.a111111.diancan.welcome;
 import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.LinkedList;
 
 import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class cdAdapter extends BaseAdapter {
     private LinkedList<cdlist> data;
+    public String base_url="http://39.107.93.96/";
+    private final OkHttpClient client = new OkHttpClient();
+    String tt="";
     private LayoutInflater layoutInflater;
     private Context context;
     private Activity Ac;
@@ -53,7 +69,28 @@ public class cdAdapter extends BaseAdapter {
         public Button xg,sc,tp;
 
     }
+    public class erro {
+        private int errno;
+        erro(int errno){
+            this.errno = errno;
+        }
 
+    }
+    final Handler hand = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            //这里的话如果接受到信息码是123
+            switch (msg.what) {
+                case 0:
+                    Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    Toast.makeText(context, "修改失败", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
     @Override
     public int getCount() {
         return data.size();
@@ -115,6 +152,86 @@ public class cdAdapter extends BaseAdapter {
         zujian.price.setText(h);
         h=data.get(position).getDesc()+"";
         zujian.desc.setText(h);
+        zujian.xg.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (!mars_file.exists()) {
+                    mars_file.mkdirs();
+                }
+
+// 并设置拍照的存在方式为外部存储和存储的路径；
+                String h=file_str + "/my_camera/file"+data.get(position).getId()+".png";
+                file_go= new File(h);
+                string2Image(data.get(position).getImg(),h);
+                BitmapFactory.Options myoptions = new BitmapFactory.Options();
+                myoptions.inJustDecodeBounds = true;
+                Bitmap bm = BitmapFactory.decodeFile(file_go.getAbsolutePath());
+                BitmapFactory.decodeFile(file_go.getAbsolutePath(), myoptions);
+//根据在图片的宽和高，得到图片在不变形的情况指定大小下的缩略图,设置宽为222；
+                int height = myoptions.outHeight * 512 / myoptions.outWidth;
+                myoptions.outWidth = 512;
+                myoptions.outHeight = height;
+//在重新设置玩图片显示的高和宽后记住要修改，Options对象inJustDecodeBounds的属性为false;
+//不然无法显示图片;
+                myoptions.inJustDecodeBounds = false;
+//还没完这里才刚开始,要节约内存还需要几个属性，下面是最关键的一个；
+                myoptions.inSampleSize = myoptions.outWidth / 222;
+//还可以设置其他几个属性用于缩小内存；
+                myoptions.inPurgeable = true;
+                myoptions.inInputShareable = true;
+                myoptions.inPreferredConfig = Bitmap.Config.ARGB_8888;// 默认是Bitmap.Config.ARGB_8888
+//成功了，下面就显示图片咯；
+                Bitmap bitmat = BitmapFactory.decodeFile(file_go.getAbsolutePath(), myoptions);
+                final CDialog2.Builder builder = new CDialog2.Builder(context);
+                builder.setTitle(data.get(position).getName());
+                builder.setpp(bitmat);
+                builder.setname(data.get(position).getName());
+                builder.setdesc(data.get(position).getDesc());
+                builder.setprice(data.get(position).getPrice());
+                builder.setPositiveButton("提交修改", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        new Thread()
+                        {
+                            @Override
+                            public void run() {
+                                try {
+                                        FormBody.Builder pa = new FormBody.Builder();
+                                        pa.add("status", "2");
+                                        pa.add("name", builder.getname());
+                                        pa.add("desc", builder.getdesc());
+                                        pa.add("price", builder.getprice());
+                                        pa.add("img", builder.getbit());
+                                        pa.add("id", data.get(position).getId());
+                                        tt = post(pa, "cdata.php");
+                                        Gson gson = new Gson();
+                                        int er = gson.fromJson(tt, cdAdapter.erro.class).errno;
+                                        if (er == 0) hand.sendEmptyMessage(0);
+                                        else if (er == 1) hand.sendEmptyMessage(1);
+                                }
+                                catch (Exception e)
+                                {
+                                    hand.sendEmptyMessage(2);
+                                }
+                            }
+
+
+                        }.start();
+                        dialog.dismiss();
+                    }
+
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+
+                });
+
+                builder.create().show();
+            }
+
+        });
         zujian.tp.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -163,7 +280,22 @@ public class cdAdapter extends BaseAdapter {
         });
         return convertView;
     }
+    String post(FormBody.Builder pa,String UR) throws Exception {
+        //post方法接收一个RequestBody对象
+        //create方法第一个参数都是MediaType类型，create方法的第二个参数可以是String、File、byte[]或okio.ByteString
 
+        Request request = new Request.Builder()
+                .url(base_url+UR)
+                .post(pa.build())
+                .build();
+
+        Response response = client.newCall(request).execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        else {
+            return response.body().string();
+
+        }
+    }
     public boolean string2Image(String imgStr, String imgFilePath) {
         // 对字节数组字符串进行Base64解码并生成图片
         if (imgStr == null)
