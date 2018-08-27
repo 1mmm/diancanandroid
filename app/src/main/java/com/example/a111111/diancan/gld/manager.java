@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.a111111.diancan.MainActivity;
 import com.example.a111111.diancan.R;
 import com.example.a111111.diancan.gld.inside.cdmanager;
+import com.example.a111111.diancan.gld.inside.gkmanager;
 
 public class manager extends AppCompatActivity {
     TextView cd,zh;
@@ -28,7 +29,7 @@ public class manager extends AppCompatActivity {
         zh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(manager.this, cdmanager.class);
+                Intent intent = new Intent(manager.this, gkmanager.class);
                 startActivity(intent);
             }
         });

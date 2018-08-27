@@ -56,12 +56,12 @@ public class cdmanager extends AppCompatActivity {
             //这里的话如果接受到信息码是123
             switch (msg.what) {
                 case 0:
-                    Toast.makeText(cdmanager.this, "修改成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(cdmanager.this, "添加成功", Toast.LENGTH_SHORT).show();
 
                     listView.setAdapter(new cdAdapter(cdmanager.this, (LinkedList<cdlist>) mData,cdmanager.this));
                     break;
                 case 1:
-                    Toast.makeText(cdmanager.this, "修改失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(cdmanager.this, "添加失败", Toast.LENGTH_SHORT).show();
                     break;
             }
         }

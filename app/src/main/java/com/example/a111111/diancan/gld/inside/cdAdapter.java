@@ -46,7 +46,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class cdAdapter extends BaseAdapter {
-    private LinkedList<cdlist> data;
+    public LinkedList<cdlist> data;
     public String base_url="http://39.107.93.96/";
     private final OkHttpClient client = new OkHttpClient();
     String tt="";
@@ -87,6 +87,18 @@ public class cdAdapter extends BaseAdapter {
                     break;
                 case 1:
                     Toast.makeText(context, "修改失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Toast.makeText(context, "删除失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    Toast.makeText(context, "未知错误", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1111:
+                    Toast.makeText(context, "1111", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -211,12 +223,17 @@ public class cdAdapter extends BaseAdapter {
                                 }
                                 catch (Exception e)
                                 {
-                                    hand.sendEmptyMessage(2);
+                                    hand.sendEmptyMessage(4);
                                 }
                             }
 
 
                         }.start();
+                        data.get(position).setName(builder.getname());
+                        data.get(position).setDesc(builder.getdesc());
+                        data.get(position).setPrice(builder.getprice());
+                        data.get(position).setImg(builder.getbit());
+                        notifyDataSetChanged();
                         dialog.dismiss();
                     }
 
@@ -277,6 +294,37 @@ public class cdAdapter extends BaseAdapter {
                 builder.create().show();
             }
 
+        });
+        zujian.sc.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                final String myid=data.get(position).getId();
+                new Thread()
+                {
+                    @Override
+                    public void run() {
+                        try {
+                            FormBody.Builder pa = new FormBody.Builder();
+                            pa.add("status", "3");
+                            pa.add("id", myid);
+                            tt = post(pa, "cdata.php");
+                            Gson gson = new Gson();
+                            int er = gson.fromJson(tt, cdAdapter.erro.class).errno;
+                            if (er == 0) hand.sendEmptyMessage(2);
+                            else if (er == 1) hand.sendEmptyMessage(3);
+                        }
+                        catch (Exception e)
+                        {
+                            hand.sendEmptyMessage(4);
+                        }
+                    }
+
+
+                }.start();
+                data.remove(position);
+                notifyDataSetChanged();
+            }
         });
         return convertView;
     }

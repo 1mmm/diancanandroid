@@ -169,6 +169,11 @@ public class CDialog2 extends Dialog {
         {
             return Bitmap2StrByBase64(c1);
         }
+
+        public Bitmap getC1() {
+            return c1;
+        }
+
         public Builder setNegativeButton(int negativeButtonText,
                                          OnClickListener listener) {
             this.negativeButtonText = (String) context
