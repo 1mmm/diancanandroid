@@ -40,7 +40,7 @@ public class gkmanager extends AppCompatActivity {
                     Toast.makeText(gkmanager.this, "发送成功", Toast.LENGTH_SHORT).show();
                     break;
                 case 6:
-                    Toast.makeText(gkmanager.this, "发送失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(gkmanager.this, "请求失败", Toast.LENGTH_SHORT).show();
                     break;
                 case 1111:
 
@@ -66,7 +66,6 @@ public class gkmanager extends AppCompatActivity {
                     tt = post(pa, "registor.php");
                     JSONObject result = new JSONObject(tt);
                     qqq = result.getJSONArray("data");
-                    handed.sendEmptyMessage(5);
                     handed.sendEmptyMessage(1111);
                 } catch (Exception e) {
                     handed.sendEmptyMessage(6);

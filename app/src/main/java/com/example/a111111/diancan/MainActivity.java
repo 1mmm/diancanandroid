@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.a111111.diancan.gld.manager;
+
 
 import static com.example.a111111.diancan.login.level;
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +50,14 @@ public class MainActivity extends AppCompatActivity {
         gld.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, manager.class);
+                Intent intent = new Intent(MainActivity.this, com.example.a111111.diancan.gld.manager.class);
+                startActivity(intent);
+            }
+        });
+        gkd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, com.example.a111111.diancan.gkd.manager.class);
                 startActivity(intent);
             }
         });
