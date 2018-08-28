@@ -108,6 +108,7 @@ public class register extends AppCompatActivity implements GestureDetector.OnGes
                             if (codea.getText().toString().equals(code.getText().toString())) {
                                 FormBody.Builder pa = new FormBody.Builder();
                                 pa.add("nichen", ans.getText().toString());
+                                pa.add("type","1");
                                 pa.add("code", code.getText().toString());
                                 pa.add("lastname", "unknown");
                                 pa.add("firstname", "unknown");

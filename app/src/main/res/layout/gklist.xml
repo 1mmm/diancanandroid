@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/div_white"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/boder">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center_vertical"
+                android:text="账号："
+                android:layout_weight="2.0"
+                android:textColor="#666872" />
+            <TextView
+                android:id="@+id/nichen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_vertical"
+
+                android:text="法式鹅肝"
+                android:layout_weight="1.0"
+                android:textColor="#666872"/>
+
+
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:gravity="left|center_vertical"
+                android:layout_weight="2.0"
+
+                android:text="密码："
+                android:textColor="#666872" />
+            <TextView
+                android:id="@+id/code"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_vertical"
+                android:textSize="15sp"
+                android:text="100"
+                android:layout_weight="1.0"
+                android:textColor="#666872"/>
+
+
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:gravity="left|center_vertical"
+                android:layout_weight="2.0"
+
+                android:text="权限等级："
+                android:textColor="#666872" />
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_vertical"
+                android:textSize="15sp"
+                android:text="100"
+                android:layout_weight="1.0"
+                android:textColor="#666872"/>
+
+
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center_vertical"
+                android:layout_weight="2.0"
+                android:text="名："
+                android:textColor="#666872" />
+            <TextView
+                android:id="@+id/firstname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_vertical"
+                android:text="好吃"
+                android:textSize="15sp"
+                android:layout_weight="1.0"
+                android:textColor="#666872"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@mipmap/sector_1_title"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/xg"
+            android:background="#00000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="修改权限"
+            android:layout_weight="1.2"
+            android:textColor="#666872" />
+        <Button
+            android:id="@+id/sc"
+            android:background="#00000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="删除"
+            android:layout_weight="1.2"
+            android:textColor="#666872"/>
+
+
+
+    </LinearLayout>
+    <View
+        android:id="@+id/div"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/div_white"/>
+</LinearLayout>
