@@ -43,7 +43,7 @@ public class login extends AppCompatActivity implements GestureDetector.OnGestur
     String tt="";
 
     static String sspp="";
-    static String user;
+    static public String user;
     static String token1;
     static double target=0;
     static SharedHelper sh;

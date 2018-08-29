@@ -27,7 +27,7 @@
             android:id="@+id/lv"
             style="@style/text_18_ffffff"
             android:layout_width="fill_parent"
-            android:layout_height="300dip"
+            android:layout_height="500dip"
             android:contentDescription="大图"
             android:gravity="center"
             android:visibility="visible" />

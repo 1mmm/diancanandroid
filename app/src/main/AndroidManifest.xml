@@ -38,7 +38,7 @@
         <activity android:name=".gld.inside.cdmanager" />
         <activity android:name=".gld.inside.gkmanager" />
         <activity android:name=".gkd.manager" />
-        <activity android:name=".gkd.inside.camanager"></activity>
+        <activity android:name=".gkd.inside.cdmanager"></activity>
     </application>
 
 </manifest>

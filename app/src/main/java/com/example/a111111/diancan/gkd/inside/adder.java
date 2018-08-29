@@ -79,7 +79,7 @@ public class adder extends LinearLayout {
      * 对外提供设置EditText值的方法
      */
     public void setNumber(int number){
-        if (number>0){
+        if (number>=0){
             et_number.setText(number+"");
         }
     }
