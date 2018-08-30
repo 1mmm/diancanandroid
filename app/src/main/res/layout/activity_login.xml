@@ -38,7 +38,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.75"
 
-                    android:background="@mipmap/ic_launcher"/>
+                    android:background="@mipmap/smile"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
