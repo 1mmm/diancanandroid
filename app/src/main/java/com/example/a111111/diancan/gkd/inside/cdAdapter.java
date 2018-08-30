@@ -1,6 +1,7 @@
 package com.example.a111111.diancan.gkd.inside;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,8 +18,12 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -53,6 +58,8 @@ public class cdAdapter extends BaseAdapter {
     public String base_url="http://39.107.93.96/";
     private final OkHttpClient client = new OkHttpClient();
     String tt="";
+    public   int index=-1;
+    public  myWatcher mWatcher;
     private LayoutInflater layoutInflater;
     private Context context;
     private Activity Ac;
@@ -130,14 +137,14 @@ public class cdAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             //请求权限
             ActivityCompat.requestPermissions(Ac,
-                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0X11);
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0X11);
             //判断是否需要 向用户解释，为什么要申请该权限
             ActivityCompat.shouldShowRequestPermissionRationale(Ac,
-                    android.Manifest.permission.READ_CONTACTS);
+                    Manifest.permission.READ_CONTACTS);
             //InputMethodManager  manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         }
         if (ContextCompat.checkSelfPermission(context,
@@ -145,10 +152,10 @@ public class cdAdapter extends BaseAdapter {
                 != PackageManager.PERMISSION_GRANTED) {
             //请求权限
             ActivityCompat.requestPermissions(Ac,
-                    new String[]{android.Manifest.permission.CAMERA}, 0X11);
+                    new String[]{Manifest.permission.CAMERA}, 0X11);
             //判断是否需要 向用户解释，为什么要申请该权限
             ActivityCompat.shouldShowRequestPermissionRationale(Ac,
-                    android.Manifest.permission.READ_CONTACTS);
+                    Manifest.permission.READ_CONTACTS);
             //InputMethodManager  manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         }
         final Zujian zujian=new Zujian();
@@ -161,6 +168,9 @@ public class cdAdapter extends BaseAdapter {
         zujian.add=(adder) convertView.findViewById(R.id.adv_main);
         zujian.img=(ImageView )convertView.findViewById(R.id.tp);
         //绑定数据
+
+
+
 
         zujian.add.setOnAddDelClickListener(new adder.OnAddDelClickListener() {
             @Override
@@ -225,7 +235,69 @@ public class cdAdapter extends BaseAdapter {
                 builder.create().show();
             }
         });
+        zujian.add.setOnTouchListener(new View.OnTouchListener() {
+
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if(event.getAction()== MotionEvent.ACTION_UP){
+                    index=position;
+                }
+                return false;
+            }
+        });
+
+        zujian.add.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            //设置焦点监听，当获取到焦点的时候才给它设置内容变化监听解决卡的问题
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                EditText et=(EditText) v;
+                if(mWatcher==null){
+                    mWatcher=new myWatcher();
+                }
+                if(hasFocus){
+                    et.addTextChangedListener(mWatcher);//设置edittext内容监听
+                }else {
+                    et.removeTextChangedListener(mWatcher);
+                }
+
+            }
+        });
+
+        zujian.add.clearFocus();//防止点击以后弹出键盘，重新getview导致的焦点丢失
+        if (index != -1 && index == position) {
+            // 如果当前的行下标和点击事件中保存的index一致，手动为EditText设置焦点。
+            zujian.add.requestFocus();
+        }
+        zujian.add.setNumber(num[position]);//这一定要放在clearFocus()之后，否则最后输入的内容在拉回来时会消失
+
         return convertView;
+    }
+
+    class myWatcher implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before,
+                                  int count) {
+            // TODO Auto-generated method stub
+
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            num[index]=Integer.valueOf(s.toString());//为输入的位置内容设置数组管理器，防止item重用机制导致的上下内容一样的问题
+        }
+
     }
     String post(FormBody.Builder pa,String UR) throws Exception {
         //post方法接收一个RequestBody对象
