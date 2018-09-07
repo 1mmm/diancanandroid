@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.example.a111111.diancan.ctd.inside.diningroom;
 
 import static com.example.a111111.diancan.login.level;
 public class MainActivity extends AppCompatActivity {
@@ -58,6 +59,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, com.example.a111111.diancan.gkd.manager.class);
+                startActivity(intent);
+            }
+        });
+        ctd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, com.example.a111111.diancan.ctd.manager.class);
+                startActivity(intent);
+            }
+        });
+        syd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, com.example.a111111.diancan.syd.manager.class);
+                startActivity(intent);
+            }
+        });
+        hcd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, com.example.a111111.diancan.hcd.manager.class);
                 startActivity(intent);
             }
         });

@@ -43,6 +43,7 @@ public class cdlist {
         this.img = img;
     }
 
+
     private String name;
     private String price;
     private String desc;

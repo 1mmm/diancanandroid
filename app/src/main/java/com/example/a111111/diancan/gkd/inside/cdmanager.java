@@ -23,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,7 +33,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-
+import static com.example.a111111.diancan.login.fn;
+import static com.example.a111111.diancan.login.ln;
 public class cdmanager extends AppCompatActivity {
     static public int[] num=new int[1000];
     static public int len=0;
@@ -103,8 +106,30 @@ public class cdmanager extends AppCompatActivity {
                 builder.setprice(zj+"元");
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        new Thread() {
+                            public void run() {
+                                try {
+                                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    for (int i=0;i<len;i++)
+                                    {
+                                        if (num[i]>0)
+                                        {
+                                            FormBody.Builder pa = new FormBody.Builder();
+                                            pa.add("status", "1");
+                                            pa.add("uid", ln+" "+fn);
+                                            pa.add("menu", mData.get(i).getName());
+                                            pa.add("num", ""+num[i]);
+                                            pa.add("tim", df.format(new Date()));
+                                            tt = post(pa, "data.php");
+                                        }
+                                    }
+                                    handed.sendEmptyMessage(5);
 
-
+                                } catch (Exception e) {
+                                    handed.sendEmptyMessage(6);
+                                }
+                            }
+                        }.start();
                         dialog.dismiss();
                     }
 

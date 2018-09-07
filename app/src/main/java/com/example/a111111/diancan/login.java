@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -47,7 +48,7 @@ public class login extends AppCompatActivity implements GestureDetector.OnGestur
     static String token1;
     static double target=0;
     static SharedHelper sh;
-    static String ln,fn,ag;
+    static public  String ln,fn,ag;
     static int level;
 
     private Context mContext;
@@ -57,14 +58,14 @@ public class login extends AppCompatActivity implements GestureDetector.OnGestur
         private String token;
         private  int level;
         private String lastname;
-        private String firstname;
+        private String FirstName;
         private String age;
         erro(int errno,String token,int level,String lastname,String firstname,String age){
             this.errno = errno;
             this.token = token;
             this.level=level;
             this.age=age;
-            this.firstname=firstname;
+            this.FirstName=firstname;
             this.lastname=lastname;
         }
     }
@@ -150,11 +151,14 @@ public class login extends AppCompatActivity implements GestureDetector.OnGestur
                             sh.save("username",ans.getText().toString());
                             sh.save("password",code.getText().toString());
                             tt=post(pa,"login.php");
+                            System.out.println(ans.getText().toString());
+                            System.out.println(code.getText().toString());
+                            System.out.println(tt);
                             Gson gson = new Gson();
                             int er = gson.fromJson(tt,erro.class).errno;
                             token1=gson.fromJson(tt,erro.class).token;
                             level=gson.fromJson(tt,erro.class).level;
-                            fn=gson.fromJson(tt,erro.class).firstname;
+                            fn=gson.fromJson(tt,erro.class).FirstName;
                             ln=gson.fromJson(tt,erro.class).lastname;
                             ag=gson.fromJson(tt,erro.class).age;
                             if (er==0)
@@ -185,17 +189,29 @@ public class login extends AppCompatActivity implements GestureDetector.OnGestur
         //post方法接收一个RequestBody对象
         //create方法第一个参数都是MediaType类型，create方法的第二个参数可以是String、File、byte[]或okio.ByteString
 
-        Request request = new Request.Builder()
-                .url(base_url+UR)
-                .post(pa.build())
-                .build();
+        System.out.println("liuenbeiwansui");
+        try{
+            Request request = new Request.Builder()
+                    .url(base_url+UR)
+                    .post(pa.build())
+                    .build();
+        /*Request request = new Request.Builder()
+                .url(base_url+UR+"?id=1mmm&pwd=7539100")
+                .get()
+                .build();*/
 
-        Response response = client.newCall(request).execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        else {
-            return response.body().string();
+            Response response = client.newCall(request).execute();
+            System.out.println("liuenbeiwansui");
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            else {
+                return response.body().string();
 
+            }
+        }catch (Exception e){
+            System.out.println("liuenbeizhizhang");
+            System.out.println(e);
         }
+    return "zhizhang";
     }
     public	boolean	onTouchEvent(MotionEvent	event)	{
 //	TODO	Auto-generated	method	stub

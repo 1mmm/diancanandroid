@@ -34,15 +34,25 @@
         </activity>
         <activity android:name=".register" />
         <activity android:name=".welcome" />
+        <activity android:name=".ctd.inside.diningroom" />
         <activity android:name=".gld.manager" />
-        <activity android:name=".gld.inside.cdmanager"
-            android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".gld.inside.gkmanager"
-            android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity
+            android:name=".gld.inside.cdmanager"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+        <activity
+            android:name=".gld.inside.gkmanager"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
         <activity android:name=".gkd.manager" />
-        <activity android:name=".gkd.inside.cdmanager"
-            android:configChanges="orientation|keyboard|keyboardHidden">
-        </activity>
+        <activity
+            android:name=".gkd.inside.cdmanager"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+        <activity
+            android:name=".ctd.manager"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+        <activity android:name=".hcd.manager" />
+        <activity android:name=".syd.manager" />
+        <activity android:name=".syd.inside.sycom" />
+        <activity android:name=".hcd.inside.tjinfo"></activity>
     </application>
 
 </manifest>
