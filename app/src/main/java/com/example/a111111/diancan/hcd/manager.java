@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.a111111.diancan.R;
 import com.example.a111111.diancan.gkd.inside.cdmanager;
+import com.example.a111111.diancan.hcd.inside.cpwc;
 import com.example.a111111.diancan.hcd.inside.tjinfo;
 
 import static com.example.a111111.diancan.login.user;
@@ -26,7 +27,8 @@ public class manager extends AppCompatActivity {
         cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(com.example.a111111.diancan.hcd.manager.this, cpwc.class);
+                startActivity(intent);
             }
         });
         zh.setOnClickListener(new View.OnClickListener() {
